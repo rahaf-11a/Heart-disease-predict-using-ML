@@ -1,62 +1,138 @@
-# Heart Disease Prediction
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Dataset](#dataset)
-3. [Features](#features)
-4. [Methodology](#methodology)
-5. [Results](#results)
-6. [Usage](#usage)
-7. [Contributing](#contributing)
-8. [License](#license)
+# Heart Disease Prediction Using Machine Learning
 
-## Introduction
-This project aims to develop a machine learning model that can accurately predict the presence or absence of heart disease in patients. The model is designed to assist healthcare professionals in making more timely and accurate diagnoses, ultimately leading to improved treatment effectiveness and patient outcomes.
+A comparative machine learning project exploring heart disease classification using clinical attributes. The project evaluates Logistic Regression, Random Forest, and K-Nearest Neighbors (KNN), with an emphasis on data preprocessing, feature selection, model evaluation, and reproducibility.
+
+## Project Overview
+
+The objective is to investigate how different machine learning algorithms classify heart disease using structured clinical data.
+
+The project includes:
+- Exploratory data analysis and preprocessing.
+- Duplicate detection and removal.
+- Feature selection using Recursive Feature Elimination (RFE).
+- Comparative evaluation of three classification algorithms.
+- Performance analysis using multiple evaluation metrics.
 
 ## Dataset
-The dataset used in this project is the Heart Disease dataset, sourced from the Cleveland Clinic Foundation and available on Kaggle. The dataset contains medical records of 1,025 individuals, with 14 features (including age, gender, blood pressure, cholesterol levels, etc.) and a binary target variable indicating the presence or absence of heart disease.
+
+The project uses a publicly available Heart Disease dataset sourced from Kaggle.
+
+- Original dataset: 1,025 records
+- Input features: 13 clinical attributes
+- Target: Binary heart disease classification
+- Unique records after duplicate removal: 302
+
+The original dataset contains duplicate observations. To reduce data leakage, duplicate records are removed before splitting the data into training and testing sets.
 
 ## Features
-The dataset contains the following features:
 
-1. Age
-2. Gender
-3. Chest pain type (4 values)
-4. Resting blood pressure
-5. Serum cholesterol in mg/dl
-6. Fasting blood sugar > 120 mg/dl
-7. Resting electrocardiographic results (values 0,1,2)
-8. Maximum heart rate achieved
-9. Exercise-induced angina
-10. Oldpeak = ST depression induced by exercise relative to rest
-11. The slope of the peak exercise ST segment
-12. Number of major vessels (0-3) colored by fluoroscopy
-13. Thal: 0 = normal; 1 = fixed defect; 2 = reversible defect
+The dataset includes the following attributes:
+
+- Age
+- Sex
+- Chest pain type (cp)
+- Resting blood pressure (trestbps)
+- Cholesterol (chol)
+- Fasting blood sugar (fbs)
+- Resting ECG results (restecg)
+- Maximum heart rate (thalach)
+- Exercise-induced angina (exang)
+- ST depression (oldpeak)
+- ST segment slope (slope)
+- Number of major vessels (ca)
+- Thalassemia-related test category (thal)
+
+The target variable indicates the presence or absence of heart disease.
 
 ## Methodology
-The project follows these steps:
 
-1. Data exploration and preprocessing
-2. Feature selection using Recursive Feature Elimination (RFE)
-3. Model construction using logistic regression
-4. Model evaluation using various metrics (AUC score, confusion matrix, classification report, ROC curve)
-5. Model testing on the unseen test set
-6. Visualization of predicted probabilities for both training and test sets
+### 1. Data Preprocessing
+
+The dataset is inspected for duplicates and prepared for model training.
+
+Duplicate records are removed before creating the training and test sets.
+
+### 2. Feature Selection
+
+Recursive Feature Elimination (RFE) is applied to Logistic Regression to identify relevant predictive features.
+
+### 3. Machine Learning Models
+
+Three classification algorithms are evaluated:
+
+- Logistic Regression with RFE
+- Random Forest Classifier
+- K-Nearest Neighbors (KNN)
+
+### 4. Model Evaluation
+
+Model performance is assessed using:
+
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
+- Confusion matrix
+- Cross-validation
+
+Data preprocessing and feature selection are fitted using training data to avoid information leakage.
 
 ## Results
-The developed logistic regression model achieved an AUC score of 0.88 on the test set, indicating good predictive performance. The model's ability to accurately classify heart disease cases was demonstrated through the confusion matrix and classification report.
+
+The following results were obtained from the revised evaluation after removing duplicate records.
+
+| Model | Accuracy | F1-score | ROC-AUC |
+|---|---:|---:|---:|
+| Logistic Regression + RFE | 82.0% | 83.6% | 87.1% |
+| Random Forest | 75.4% | 77.6% | 86.1% |
+| KNN | 78.7% | 81.2% | 83.8% |
+
+The revised evaluation uses 241 training records and 61 test records.
+
+These findings demonstrate the importance of addressing duplicate observations when evaluating machine learning models.
+
+Results are specific to this dataset and experimental configuration. They should not be interpreted as evidence of clinical diagnostic performance.
+
+## Technologies
+
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Matplotlib
+- Seaborn
 
 ## Usage
-To use the heart disease prediction model, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/heart-disease-prediction.git`
-2. Install the required dependencies: `pip install -r requirements.txt`
-3. Run the Python script: `python heart_disease_prediction.py`
+Clone the repository:
 
-The script will output the model's performance metrics and visualizations.
+```bash
+git clone https://github.com/rahaf-11a/Heart-disease-predict-using-ML.git
+cd Heart-disease-predict-using-ML
+```
 
-## Contributing
-Contributions to this project are welcome. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+Install the required dependencies:
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+```bash
+pip install -r requirements.txt
+```
+
+Run the revised model comparison:
+
+```bash
+python compare_heart_disease_models.py --data heart.csv
+```
+
+The script evaluates the models and generates performance metrics and visualizations.
+
+## Project Limitations
+
+- The dataset is relatively small after duplicate removal.
+- Results require further validation on independent datasets.
+- The project is intended for educational and experimental purposes, not clinical diagnosis.
+
+## Acknowledgments
+
+This project was developed collaboratively as part of an academic machine learning project. It builds upon publicly available heart disease data and existing machine learning approaches.
